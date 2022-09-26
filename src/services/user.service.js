@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const tokenGenerator = require('../utils/tokenGenerator');
 
 const getByEmailAndPassword = async ({ email, password }) => {
   const user = await User.findOne({
@@ -22,7 +23,16 @@ const getByEmail = async (email) => {
   return user;
 };
 
+const createUser = async (payload) => {
+  const newUser = await User.create(payload);
+
+  const token = tokenGenerator(newUser.email);
+
+  return token;
+};
+
 module.exports = {
   getByEmailAndPassword,
   getByEmail,
+  createUser,
 };
