@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/login', loginRouter);
-app.use('/login', userRouter);
+app.use('/user', userRouter);
 
 app.use(errorMiddleware);
 // É importante exportar a constante `app`,
