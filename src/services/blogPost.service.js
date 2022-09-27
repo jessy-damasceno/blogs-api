@@ -22,8 +22,7 @@ const insert = async ({ title, content, userId, categoryIds }) => {
       { title, content, userId },
       { transaction: t },
     );
-    console.log('postId         ', newPost.id);
-    console.log('categoryIds         ', categoryIds);
+
     await Promise.all(
       categoryIds.map((categoryId) =>
       PostCategory.create({ postId: newPost.id, categoryId }, { transaction: t })),
