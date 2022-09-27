@@ -31,8 +31,11 @@ const createUser = async (payload) => {
   return token;
 };
 
+const findAll = () => User.findAll({ attributes: { exclude: ['password'] } }) || [];
+
 module.exports = {
   getByEmailAndPassword,
   getByEmail,
   createUser,
+  findAll,
 };
