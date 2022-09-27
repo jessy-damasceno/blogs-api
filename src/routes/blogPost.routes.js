@@ -20,6 +20,6 @@ blogPostRouter.route('/')
     getAllPosts,
     );
 
-blogPostRouter.get('/:id', getPostById);
+blogPostRouter.get('/:id', validateToken, getPostById);
 
 module.exports = blogPostRouter;
