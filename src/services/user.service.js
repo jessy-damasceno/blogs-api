@@ -33,9 +33,19 @@ const createUser = async (payload) => {
 
 const findAll = () => User.findAll({ attributes: { exclude: ['password'] } }) || [];
 
+const findByPk = async (id) => {
+  const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+
+  if (user) {
+    return { type: null, message: user.dataValues };
+  }
+  return { type: 'NOT_FOUND', message: 'User does not exist' };
+};
+
 module.exports = {
   getByEmailAndPassword,
   getByEmail,
   createUser,
   findAll,
+  findByPk,
 };
