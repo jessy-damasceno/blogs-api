@@ -1,4 +1,4 @@
-const { insert, findAll } = require('../services/blogPost.service');
+const { insert, findAll, findById } = require('../services/blogPost.service');
 
 const postBlogPost = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -14,7 +14,17 @@ const getAllPosts = async (req, res) => {
   return res.status(200).json(postsList);
 };
 
+const getPostById = async (req, res) => {
+  const post = await findById(req.params.id);
+
+  if (post) {
+    return res.status(200).json(post);
+  }
+  return res.status(404).json({ message: 'Post does not exist' });
+};
+
 module.exports = {
   postBlogPost,
   getAllPosts,
+  getPostById,
 };
