@@ -1,4 +1,4 @@
-const { addUserSchema, categorySchema } = require('./schemas');
+const { addUserSchema, categorySchema, blogPostSchema } = require('./schemas');
 
 const validateNewUser = (payload) => {
   const { error } = addUserSchema.validate(payload);
@@ -24,7 +24,20 @@ const validateNewCategory = (payload) => {
   return { type: null };
 };
 
+const validateNewPost = (payload) => {
+  const { error } = blogPostSchema.validate(payload);
+
+  if (error) {
+    return {
+      type: 'FIELD_REQUIRED',
+      message: 'Some required fields are missing',
+    }; 
+  }
+  return { type: null };
+};
+
 module.exports = {
   validateNewUser,
   validateNewCategory,
+  validateNewPost,
 };
