@@ -6,6 +6,9 @@ const createCategory = async (payload) => {
   return newCategory;
 };
 
+const findAll = () => Category.findAll({ attributes: { exclude: ['password'] } }) || [];
+
 module.exports = {
   createCategory,
+  findAll,
 };
