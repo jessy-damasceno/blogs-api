@@ -4,10 +4,12 @@ module.exports = async (req, res, next) => {
   const { categoryIds } = req.body;
   const isCategories = await isCategoriesVerify(categoryIds);
 
+  console.log('isCategories', isCategories);
+
   if (isCategories) {
-    next();
+    return next();
   }
-  next({
+  return next({
     type: 'INVALID_FIELD',
     message: '"categoryIds" not found',
   });
