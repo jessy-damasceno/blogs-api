@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { postBlogPost } = require('../controllers/blogPost.controller');
 const validateCategoryExists = require('../middlewares/validateCategoryExists');
 // const validateUser = require('../middlewares/validateUser');
 // const isExistsUser = require('../middlewares/isExistsUser');
@@ -12,7 +13,7 @@ blogPostRouter.route('/')
     validateToken,
     validatePost,
     validateCategoryExists,
-    (req, res) => res.status(200).json(res.locals.user),
+    postBlogPost,
     )
   .get(validateToken);
 
