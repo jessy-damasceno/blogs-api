@@ -1,4 +1,4 @@
-const { insert } = require('../services/blogPost.service');
+const { insert, findAll } = require('../services/blogPost.service');
 
 const postBlogPost = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -8,6 +8,13 @@ const postBlogPost = async (req, res) => {
   return res.status(201).json(newPost);
 };
 
+const getAllPosts = async (req, res) => {
+  const postsList = await findAll();
+
+  return res.status(200).json(postsList);
+};
+
 module.exports = {
   postBlogPost,
+  getAllPosts,
 };
