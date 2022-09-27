@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       foreignKey: true,
     },
+    published: DataTypes.DATE,
+    updated: DataTypes.DATE,
   },
   {
     timestamps: true,
@@ -30,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
 
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, {
-      foreignKey: 'id',
-      as: 'blog_posts',
+      foreignKey: 'userId',
+      as: 'user',
     })
   }
 
