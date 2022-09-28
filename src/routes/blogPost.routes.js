@@ -5,6 +5,7 @@ const {
   getPostById,
   updatePostById,
   deletePostById,
+  getAllPostsByQuery,
 } = require('../controllers/blogPost.controller');
 
 const validateCategoryExists = require('../middlewares/validateCategoryExists');
@@ -15,6 +16,8 @@ const validateUpdatePostFields = require('../middlewares/validateUpdatePostField
 const validateIsPostExists = require('../middlewares/validateIsPostExists');
 
 const blogPostRouter = Router();
+
+blogPostRouter.get('/search', validateToken, getAllPostsByQuery);
 
 blogPostRouter.route('/')
   .post(
