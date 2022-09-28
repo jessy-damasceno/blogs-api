@@ -1,4 +1,5 @@
 const { insert, findAll, findById, update } = require('../services/blogPost.service');
+const { BlogPost } = require('../models');
 
 const postBlogPost = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -35,9 +36,17 @@ const updatePostById = async (req, res) => {
   }
 };
 
+const deletePostById = async (req, res) => {
+  const { id } = req.params;
+
+  await BlogPost.destroy({ where: { id } });
+  return res.status(204).json();
+};
+
 module.exports = {
   postBlogPost,
   getAllPosts,
   getPostById,
   updatePostById,
+  deletePostById,
 };

@@ -4,6 +4,7 @@ const {
   getAllPosts,
   getPostById,
   updatePostById,
+  deletePostById,
 } = require('../controllers/blogPost.controller');
 
 const validateCategoryExists = require('../middlewares/validateCategoryExists');
@@ -11,6 +12,7 @@ const validatePost = require('../middlewares/validatePost');
 const validateToken = require('../middlewares/validateToken');
 const validatePostOwner = require('../middlewares/validatePostOwner');
 const validateUpdatePostFields = require('../middlewares/validateUpdatePostFields');
+const validateIsPostExists = require('../middlewares/validateIsPostExists');
 
 const blogPostRouter = Router();
 
@@ -28,6 +30,7 @@ blogPostRouter.route('/')
 
 blogPostRouter.route('/:id')
   .get(validateToken, getPostById)
-  .put(validateToken, validatePostOwner, validateUpdatePostFields, updatePostById);
+  .put(validateToken, validatePostOwner, validateUpdatePostFields, updatePostById)
+  .delete(validateToken, validateIsPostExists, validatePostOwner, deletePostById);
 
 module.exports = blogPostRouter;

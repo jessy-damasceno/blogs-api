@@ -4,7 +4,6 @@ module.exports = async (req, res, next) => {
   const { id } = req.params;
   const { user } = res.locals;
 
-  try {
     const post = await findById(id);
 
     if (user.id === post.userId) {
@@ -15,7 +14,4 @@ module.exports = async (req, res, next) => {
       type: 'UNAUTHORIZED_USER',
       message: 'Unauthorized user',
     });
-  } catch (error) {
-    next(error);
-  }
 };
