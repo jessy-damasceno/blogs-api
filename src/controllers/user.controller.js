@@ -1,5 +1,6 @@
 const { createUser, findAll, findByPk } = require('../services/user.service');
 const { mapError } = require('../utils/errorMap');
+const { User } = require('../models');
 
 const postUser = async (req, res) => {
   const token = await createUser(req.body);
@@ -22,8 +23,15 @@ const getUserById = async (req, res) => {
   return res.status(mapError(type)).json({ message });
 };
 
+const deleteMe = async (req, res) => {
+  const { id } = res.locals.user;
+  await User.destroy({ where: { id } });
+  return res.status(204).end();
+};
+
 module.exports = {
   postUser,
   getUser,
   getUserById,
+  deleteMe,
 };
