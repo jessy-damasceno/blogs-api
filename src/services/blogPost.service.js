@@ -51,10 +51,7 @@ const update = async ({ id, title, content }) => {
     { where: { id } },
   );
 
-  const postUpdated = await BlogPost.findByPk(id, { include: [
-    { model: User, as: 'user', attributes: { exclude: ['password'] } },
-    { model: Category, as: 'categories' },
-  ] });
+  const postUpdated = await findById(id);
 
   return postUpdated;
 };
