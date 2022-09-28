@@ -1,10 +1,15 @@
 const { Router } = require('express');
-const { postBlogPost, getAllPosts, getPostById } = require('../controllers/blogPost.controller');
+const { 
+  postBlogPost,
+  getAllPosts,
+  getPostById,
+  updatePostById,
+} = require('../controllers/blogPost.controller');
+
 const validateCategoryExists = require('../middlewares/validateCategoryExists');
-// const validateUser = require('../middlewares/validateUser');
-// const isExistsUser = require('../middlewares/isExistsUser');
 const validatePost = require('../middlewares/validatePost');
 const validateToken = require('../middlewares/validateToken');
+const validatePostOwner = require('../middlewares/validatePostOwner');
 
 const blogPostRouter = Router();
 
@@ -20,6 +25,8 @@ blogPostRouter.route('/')
     getAllPosts,
     );
 
-blogPostRouter.get('/:id', validateToken, getPostById);
+blogPostRouter.route('/:id')
+  .get(validateToken, getPostById)
+  .put(validateToken, validatePostOwner, updatePostById);
 
 module.exports = blogPostRouter;
