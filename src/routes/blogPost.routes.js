@@ -10,6 +10,7 @@ const validateCategoryExists = require('../middlewares/validateCategoryExists');
 const validatePost = require('../middlewares/validatePost');
 const validateToken = require('../middlewares/validateToken');
 const validatePostOwner = require('../middlewares/validatePostOwner');
+const validateUpdatePostFields = require('../middlewares/validateUpdatePostFields');
 
 const blogPostRouter = Router();
 
@@ -27,6 +28,6 @@ blogPostRouter.route('/')
 
 blogPostRouter.route('/:id')
   .get(validateToken, getPostById)
-  .put(validateToken, validatePostOwner, updatePostById);
+  .put(validateToken, validatePostOwner, validateUpdatePostFields, updatePostById);
 
 module.exports = blogPostRouter;
